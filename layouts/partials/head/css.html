@@ -1,0 +1,15 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Secular+One&display=swap');
+</style>
+{{- with resources.Get "css/main.css" }}
+  {{- if eq hugo.Environment "development" }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}">
+  {{- else }}
+    {{- with . | minify | fingerprint }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{ with resources.Get "css/chroma.css" | minify }}
+  <style>{{ .Content | safeCSS }}</style>
+{{ end }}

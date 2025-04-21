@@ -1,0 +1,22 @@
+baseURL = 'https://example.org/'
+languageCode = 'ja-jp'
+title = 'My New Hugo Site'
+hasCJKLanguage =  true
+enableEmoji = true
+
+[markup]
+[markup.tableOfContents]
+startLevel = 2
+endLevel = 5
+ordered = false
+
+[markup.highlight]
+noClasses = false
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[[menus.main]]
+name = 'Home'
+pageRef = '/'
+weight = 10

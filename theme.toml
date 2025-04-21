@@ -1,0 +1,13 @@
+name = 'yuzumone-theme'
+license = 'MIT'
+licenselink = 'https://github.com/yuzumone/hugo-yuzumone-theme/LICENSE'
+description = 'my theme'
+homepage = 'https://github.com/yuzumone/hugo-yuzumone-theme'
+demosite = 'https://yuzumone.github.io/hugo-yuzumone-theme'
+authors = [
+  {name = 'yuzumone', homepage = 'https://github.com/yuzumone'}
+]
+
+[author]
+  name = 'yuzumone'
+  homepage = 'https://github.com/yuzumone'
