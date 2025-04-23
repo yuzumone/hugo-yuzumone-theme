@@ -241,3 +241,11 @@ figure {
     font-size: 0.9rem;
   }
 }
+
+blockquote {
+  color: #616161; /* material gray 700 */
+  border-left: .25em solid;
+  margin: 1em;
+  padding: 0 1em;
+  font-style: italic;
+}
