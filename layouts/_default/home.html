@@ -1,5 +1,6 @@
 {{ define "main" }}
-{{ range site.RegularPages }}
+{{ $filtered := where .Site.RegularPages "Params.hidden" "!=" true }}
+{{ range $filtered }}
 <div class="article-item">
   <div class="article-details">
     <div>

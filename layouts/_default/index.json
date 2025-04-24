@@ -1,0 +1,10 @@
+{{ $items := slice }}
+{{ $filtered := where .Site.RegularPages "Params.hidden" "!=" true }}
+{{ range $filtered }}
+  {{ $tags := .Params.tags }}
+  {{ if eq $tags nil }}
+    {{ $tags = slice }}
+  {{ end }}
+  {{ $items = $items | append (dict "title" .Title "body" .Plain "url" .Permalink "tags" $tags) }}
+{{ end }}
+{{ $items | jsonify }}

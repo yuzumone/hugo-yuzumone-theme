@@ -249,3 +249,19 @@ blockquote {
   padding: 0 1em;
   font-style: italic;
 }
+
+#search-input {
+  background-color: #EEEEEE; /* material gray 200 */
+  border: none;
+  margin-top: 1.5rem;
+  padding: 10px;
+  font-size: medium;
+  color: #212121; /* material gray 900 */
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+
+  &::placeholder {
+     color: #9E9E9E; /* material gray 500 */
+  }
+}

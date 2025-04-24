@@ -20,3 +20,6 @@ unsafe = true
 name = 'Home'
 pageRef = '/'
 weight = 10
+
+[outputs]
+home = ["html", "json"]
