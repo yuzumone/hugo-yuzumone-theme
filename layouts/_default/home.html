@@ -1,6 +1,6 @@
 {{ define "main" }}
 {{ $filtered := where .Site.RegularPages "Params.hidden" "!=" true }}
-{{ range $filtered }}
+{{ range first 10  $filtered }}
 <div class="article-item">
   <div class="article-details">
     <div>
@@ -26,4 +26,5 @@
   {{ end }}
 </div>
 {{ end }}
+<p><a href="{{ .Site.BaseURL }}/posts/">See more posts</a></p>
 {{ end }}

@@ -1,7 +1,28 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  {{ range .Pages }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+{{ range .Pages }}
+<div class="article-item">
+  <div class="article-details">
+    <div>
+    <h2 class="subtitle"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+
+    {{ if or .Params.Description }}
+    <p class="article-description">{{ .Params.Description }}</p>
+    {{ else }}
+    <p class="article-description">{{ .Summary | plainify }}</p>
+    {{ end }}
+    </div>
+
+    <span>
+      {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+      {{ $dateHuman := .Date | time.Format ":date_long" }}
+      <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+    </span>
+  </div>
+  {{ if or .Params.Image }}
+  <div class="article-image">
+    <img src="{{ .Params.Image }}">
+  </div>
   {{ end }}
+</div>
+{{ end }}
 {{ end }}

@@ -250,6 +250,39 @@ blockquote {
   font-style: italic;
 }
 
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2rem 0 0.5rem;
+  gap: 8px;
+}
+
+.list-style-none {
+  list-style: none;
+}
+
+.font-large {
+    font-size: large;
+    color: #000;
+}
+
+.tag-item {
+  color: #212121; /* material gray 900 */
+  background-color: #F5F5F5; /* material gray 200 */
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 0.9em;
+  text-decoration: none;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #E0E0E0;
+}
+
+.tag-item:hover {
+  background-color: #E0E0E0;
+}
+
 #search-input {
   background-color: #EEEEEE; /* material gray 200 */
   border: none;
@@ -264,4 +297,13 @@ blockquote {
   &::placeholder {
      color: #9E9E9E; /* material gray 500 */
   }
+}
+
+#search-results {
+  margin: 2rem 0;
+}
+
+.not-found {
+  padding: 5rem 0;
+  text-align: center;
 }
