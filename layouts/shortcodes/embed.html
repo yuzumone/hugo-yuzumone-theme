@@ -1,0 +1,51 @@
+{{ $url := ( .Get "url" ) }}
+{{ $u := urls.Parse $url }}
+{{ with try ( $result := resources.GetRemote $url) }}
+{{ with .Err }}
+<a href="{{ $url }}">{{ .Get "title" }}</a>
+{{ else }}
+{{ $title := "" }}
+{{ $description := "" }}
+{{ $image := "" }}
+{{ $find := "" }}
+{{ $find = index (findRE `\<head.*?\>(.|\n)*?\</head\>` $result.Content) 0 }}
+{{ range $meta := findRE `\<meta.*?\>` $find }}
+  {{ $name := replaceRE `\<.*name=\"(.*?)\".*\>` "$1" $meta }}
+    {{ $property := replaceRE `\<.*property=\"(.*?)\".*\>` "$1" $meta }}
+      {{ $content := replaceRE `\<.*content=\"(.*?)\".*\>` "$1" $meta }}
+        {{ if eq $property "og:title" }}
+        {{ $title = $content }}
+        {{ else if eq $property "og:description" }}
+        {{ $description = $content }}
+        {{ else if eq $property "og:image" }}
+        {{ $image = $content }}
+        {{ end }}
+        {{ if and (eq $description "") (eq $name "description") }}
+        {{ $description = $content }}
+        {{ end }}
+        {{ end }}
+        <a href="{{ $url }}" class="website-card-link">
+          <div class="website-card">
+            <div class="website-logo">
+              {{ with $image }}
+              <img src="{{ htmlUnescape $image }}" alt="{{ $description }}">
+              {{ else }}
+              <div class="logo-placeholder"></div>
+              {{ end }}
+            </div>
+            <div class="website-details">
+              {{ with $title }}
+              <p class="website-title">{{ $title }}</p>
+              {{ else }}
+              {{ $u.Host | truncate 30 }}
+              {{ end }}
+              <p class="website-description">{{ $description | truncate 100 }}</p>
+              <div class="website-url">
+                <img src="https://www.google.com/s2/favicons?sz=14&amp;domain_url={{ $u.Scheme }}://{{ $u.Host }}" class="url-icon" alt="{{ $u.Host }} favicon image">
+                <span class="url-text">{{ $u.Host | truncate 30 }}</span>
+              </div>
+            </div>
+          </div>
+        </a>
+        {{ end }}
+        {{ end }}
