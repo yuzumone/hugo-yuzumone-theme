@@ -67,15 +67,16 @@ article {
 }
 
 .article-image {
-  height: 100px;
-  width: auto;
+  width: 33.33%;
   flex-shrink: 0;
+  height: 100px;
 }
 
 .article-image img {
   display: block;
-  width: auto;
+  width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 .header-container {
@@ -357,6 +358,10 @@ blockquote {
   font-size: 1.2em;
   font-weight: 600;
   margin-bottom: 4px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .website-description {
@@ -365,10 +370,8 @@ blockquote {
   margin: 0 0 8px;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-  line-height: 1.3;
-  height: calc(1.3em * 2);
 }
 
 .website-url {
@@ -387,4 +390,12 @@ blockquote {
 
 .url-text {
   text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+  article {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-sizing: border-box;
+  }
 }
