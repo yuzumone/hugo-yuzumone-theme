@@ -1,3 +1,13 @@
+:root {
+  --color-primary: #2196F3;
+  --color-text: #212121;
+  --color-muted: #616161;
+  --color-border: #E0E0E0;
+  --color-subtle: #9E9E9E;
+  --color-code-background: #F8F8F8;
+  --color-heading: #000;
+}
+
 body {
   font-family: "IBM Plex Sans JP", sans-serif, "Noto Color Emoji", "Apple Color Emoji";
   font-weight: 400;
@@ -18,7 +28,7 @@ article {
   font-style: normal;
 
   a {
-    color: #000;
+    color: var(--color-heading);
   }
 }
 
@@ -28,14 +38,14 @@ article {
   font-weight: 600;
 
   a {
-    color: #000;
+    color: var(--color-heading);
   }
 }
 
 .article-title {
   font-size: x-large;
   margin-top: 2rem;
-  color: #000;
+  color: var(--color-heading);
   font-weight: 600;
 }
 
@@ -56,7 +66,7 @@ article {
 }
 
 .article-description {
-  color: #616161;
+  color: var(--color-muted);
   margin-top: 0;
   margin-bottom: 0;
   padding-top: 0.5rem;
@@ -106,14 +116,14 @@ article {
 .header-line {
   width: 100%;
   border-width: 2px;
-  border-color: #212121; /* material gray 900 */
+  border-color: var(--color-text); /* material gray 900 */
   border-style: solid none none none;
 }
 
 footer {
   display: flex;
   justify-content: center;
-  border-top: 1px solid #212121; /* material gray 900 */
+  border-top: 1px solid var(--color-text); /* material gray 900 */
   margin-top: 1rem;
 
   p {
@@ -128,7 +138,7 @@ footer {
   border: 1px solid #CFD8DC; /* material blueglay 100 */
 
   summary {
-    color: #2196F3; /* material blue 500 */
+    color: var(--color-primary); /* material blue 500 */
     font-size: 1.1em;
     letter-spacing: 0.02em;
     user-select: none;
@@ -149,7 +159,7 @@ footer {
       line-height: 1.6;
 
       &::marker {
-        color: #2196F3; /* material blue 500 */
+        color: var(--color-primary); /* material blue 500 */
       }
     }
   }
@@ -168,7 +178,7 @@ code {
 .highlight {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  background-color: #F8F8F8;
+  background-color: var(--color-code-background);
   padding: 1em;
   margin: 1rem 0;
 }
@@ -179,7 +189,7 @@ code {
   word-break: normal;
   margin: 0;
   padding: 0;
-  background-color: #F8F8F8;
+  background-color: var(--color-code-background);
 }
 
 .highlight code {
@@ -197,7 +207,7 @@ table {
 
   thead {
     font-weight: 600;
-    background-color: #2196F3;
+    background-color: var(--color-primary);
     color: #FFF;
   }
 
@@ -215,7 +225,7 @@ table {
 }
 
 a {
-  color: #2196F3; /* material blue 500 */
+  color: var(--color-primary); /* material blue 500 */
   text-decoration: none;
 
   &:hover {
@@ -237,7 +247,7 @@ figure {
 
   h4 {
     margin: 0.2rem;
-    color: #9E9E9E; /* material gray 500 */
+    color: var(--color-subtle); /* material gray 500 */
     font-weight: 400;
     font-style: normal;
     font-size: 0.9rem;
@@ -245,7 +255,7 @@ figure {
 }
 
 blockquote {
-  color: #616161; /* material gray 700 */
+  color: var(--color-muted); /* material gray 700 */
   border-left: .25em solid;
   margin: 1em;
   padding: 0 1em;
@@ -253,6 +263,8 @@ blockquote {
 }
 
 .tags-container {
+  list-style: none;
+  padding: 0;
   display: flex;
   flex-wrap: wrap;
   margin: 2rem 0 0.5rem;
@@ -264,12 +276,12 @@ blockquote {
 }
 
 .font-large {
-    font-size: large;
-    color: #000;
+  font-size: large;
+  color: var(--color-heading);
 }
 
 .tag-item {
-  color: #212121; /* material gray 900 */
+  color: var(--color-text); /* material gray 900 */
   background-color: #F5F5F5; /* material gray 200 */
   border-radius: 20px;
   padding: 6px 12px;
@@ -278,11 +290,11 @@ blockquote {
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
-  border: 1px solid #E0E0E0;
+  border: 1px solid var(--color-border);
 }
 
 .tag-item:hover {
-  background-color: #E0E0E0;
+  background-color: var(--color-border);
 }
 
 #search-input {
@@ -291,13 +303,13 @@ blockquote {
   margin-top: 1.5rem;
   padding: 10px;
   font-size: medium;
-  color: #212121; /* material gray 900 */
+  color: var(--color-text); /* material gray 900 */
   border-radius: 4px;
   width: 100%;
   box-sizing: border-box;
 
   &::placeholder {
-     color: #9E9E9E; /* material gray 500 */
+     color: var(--color-subtle); /* material gray 500 */
   }
 }
 
@@ -318,7 +330,7 @@ blockquote {
 
 .website-card {
   display: flex;
-  border: 1px solid #E0E0E0;
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   margin-bottom: 16px;
   position: relative;
@@ -345,7 +357,7 @@ blockquote {
 .logo-placeholder {
   width: 100%;
   height: 100%;
-  background-color: #E0E0E0;
+  background-color: var(--color-border);
   border-radius: 4px;
 }
 
@@ -366,7 +378,7 @@ blockquote {
 
 .website-description {
   font-size: 0.8em;
-  color: #616161;
+  color: var(--color-muted);
   margin: 0 0 8px;
   overflow: hidden;
   display: -webkit-box;
@@ -378,14 +390,14 @@ blockquote {
   display: flex;
   align-items: center;
   font-size: 0.85em;
-  color: #2196F3;
+  color: var(--color-primary);
 }
 
 .url-icon {
   width: 16px;
   height: 16px;
   margin-right: 4px;
-  fill: #2196F3;
+  fill: var(--color-primary);
 }
 
 .url-text {

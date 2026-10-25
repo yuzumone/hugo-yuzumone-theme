@@ -1,15 +1,14 @@
-{{ define "body-class" }}template-archives{{ end }}
 {{ define "main" }}
-<div class="tags-container">
-{{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+<ul class="tags-container">
+{{ range $name, $_ := .Site.Taxonomies.tags }}
 {{ with $.Site.GetPage (printf "/tags/%s" $name) }}
 <li class="list-style-none">
   <a href="{{ .Permalink }}" class="tag-item">🏷️ {{ $name }}</a>
 </li>
 {{ end }}
 {{ end }}
-</div>
-<div id="search-container">
+</ul>
+<div id="search-container" data-index-url="{{ "index.json" | relURL }}">
   <input type="text" id="search-input" placeholder="Type something...">
   <div id="search-results"></div>
 </div>

@@ -1,8 +1,6 @@
 <nav>
-  {{ $currentPage := . }}
   <ul class="flex-items">
     {{ range .Site.Menus.main }}
-    {{ $url := printf "%s" (.URL | relURL) }}
     <li class="header-item">
       <a href="{{ .URL }}">{{ .Name | title }}</a>
     </li>
