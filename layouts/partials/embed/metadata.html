@@ -1,0 +1,14 @@
+{{- $metadata := dict -}}
+{{- range findRE `(?is)<head\b[^>]*>.*?</head\s*>` . }}
+  {{- range findRE `(?is)<meta\b[^>]*>` . }}
+    {{- $attributes := dict -}}
+    {{- range findRESubmatch `(?is)([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))` . }}
+      {{- $attributes = merge $attributes (dict (lower (index . 1)) (htmlUnescape (or (index . 2) (index . 3) (index . 4)))) -}}
+    {{- end }}
+    {{- $key := lower (or (index $attributes "property") (index $attributes "name") "") -}}
+    {{- with index $attributes "content" }}
+      {{- $metadata = merge $metadata (dict $key .) -}}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- return (dict "title" (index $metadata "og:title" | default "") "description" (or (index $metadata "og:description") (index $metadata "description") "") "image" (index $metadata "og:image" | default "")) -}}

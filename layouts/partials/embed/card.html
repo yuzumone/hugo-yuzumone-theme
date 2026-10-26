@@ -1,0 +1,24 @@
+{{- $host := .host -}}
+<a href="{{ .url }}" class="website-card-link">
+  <div class="website-card">
+    <div class="website-logo">
+      {{ with .metadata.image }}
+      <img src="{{ . }}" alt="{{ $.metadata.description }}">
+      {{ else }}
+      <div class="logo-placeholder"></div>
+      {{ end }}
+    </div>
+    <div class="website-details">
+      {{ with .metadata.title }}
+      <p class="website-title">{{ . }}</p>
+      {{ else }}
+      {{ $host | truncate 30 }}
+      {{ end }}
+      <p class="website-description">{{ .metadata.description | truncate 100 }}</p>
+      <div class="website-url">
+        <img src="https://www.google.com/s2/favicons?sz=14&amp;domain_url={{ .scheme }}://{{ $host }}" class="url-icon" alt="{{ $host }} favicon image">
+        <span class="url-text">{{ $host | truncate 30 }}</span>
+      </div>
+    </div>
+  </div>
+</a>

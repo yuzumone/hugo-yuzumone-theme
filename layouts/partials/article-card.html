@@ -1,0 +1,18 @@
+<div class="article-item">
+  <div class="article-details">
+    <div>
+    <h2 class="subtitle"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+
+    <p class="article-description">{{ .Description | default (.Summary | plainify) }}</p>
+    </div>
+
+    <span>
+      {{ partial "post-date.html" (dict "page" .) }}
+    </span>
+  </div>
+  {{ if .Params.Image }}
+  <div class="article-image">
+    <img src="{{ .Params.Image }}">
+  </div>
+  {{ end }}
+</div>

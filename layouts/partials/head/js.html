@@ -1,14 +1,10 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js"></script> -->
-{{- with resources.Get "js/search.js" }}
-  {{- if eq hugo.Environment "development" }}
-    {{- with . | js.Build }}
-      <script src="{{ .RelPermalink }}"></script>
+{{- if eq .Layout "archives" }}
+  {{- with resources.Get "js/search.js" }}
+    {{- $opts := dict "minify" (ne hugo.Environment "development") }}
+    {{- $script := . | js.Build $opts }}
+    {{- if ne hugo.Environment "development" }}
+      {{- $script = $script | fingerprint }}
     {{- end }}
-  {{- else }}
-    {{- $opts := dict "minify" true }}
-    {{- with . | js.Build $opts | fingerprint }}
-      <script src="{{ .RelPermalink }}" integrity="{{- .Data.Integrity }}" crossorigin="anonymous"></script>
-    {{- end }}
+    <script src="{{ $script.RelPermalink }}" defer{{ with $script.Data.Integrity }} integrity="{{ . }}" crossorigin="anonymous"{{ end }}></script>
   {{- end }}
 {{- end }}
