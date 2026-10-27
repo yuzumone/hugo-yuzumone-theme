@@ -24,6 +24,10 @@ weight = 10
 [outputs]
 home = ["html", "json"]
 
+# Optional: limit the home page to selected content sections.
+[params]
+# mainSections = ['post']
+
 # Optional: set your IDs to enable these services in production builds.
 [services.googleAnalytics]
 id = ''
