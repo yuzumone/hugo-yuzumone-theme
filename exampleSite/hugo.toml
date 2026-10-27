@@ -23,3 +23,10 @@ weight = 10
 
 [outputs]
 home = ["html", "json"]
+
+# Optional: set your IDs to enable these services in production builds.
+[services.googleAnalytics]
+id = ''
+
+[params.googleAdSense]
+client = ''
