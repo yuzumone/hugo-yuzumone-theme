@@ -1,0 +1,8 @@
+{{- with resources.Get "js/theme.js" }}
+  {{- $opts := dict "minify" (ne hugo.Environment "development") }}
+  {{- $script := . | js.Build $opts }}
+  {{- if ne hugo.Environment "development" }}
+    {{- $script = $script | fingerprint }}
+  {{- end }}
+  <script src="{{ $script.RelPermalink }}"{{ with $script.Data.Integrity }} integrity="{{ . }}" crossorigin="anonymous"{{ end }}></script>
+{{- end }}

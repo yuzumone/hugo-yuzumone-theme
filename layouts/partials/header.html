@@ -2,6 +2,15 @@
   <div class="flex-none">
     <h1 class="title"><a href="{{ .Site.BaseURL }}">{{ .Site.Title}}</a></h1>
   </div>
+  <button class="theme-toggle" type="button" aria-label="ダークモードに切り替える" hidden>
+    <svg class="theme-icon-moon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z" />
+    </svg>
+    <svg class="theme-icon-sun" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" />
+    </svg>
+  </button>
   {{ if .Site.Menus.main }}
   <button class="menu-toggle" type="button" aria-controls="site-menu" aria-expanded="false" aria-label="メニューを開く" hidden>
     <svg class="menu-icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
