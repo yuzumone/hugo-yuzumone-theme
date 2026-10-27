@@ -9,19 +9,26 @@
 }
 
 body {
+  margin: 0;
   font-family: "IBM Plex Sans JP", sans-serif, "Noto Color Emoji", "Apple Color Emoji";
+  font-size: 1rem;
   font-weight: 400;
   font-style: normal;
+  line-height: 1.75;
 }
 
 article {
+  width: calc(100% - 3rem);
   max-width: 800px;
+  padding-block: 1.5rem 2rem;
   margin-left: auto;
   margin-right: auto;
 }
 
 .title {
-  font-size: xx-large;
+  margin: 0;
+  line-height: 1.3;
+  font-size: clamp(1.75rem, 1.5rem + 1vw, 2rem);
   text-decoration: none;
   font-family: "Secular One", sans-serif;
   font-weight: 400;
@@ -33,8 +40,9 @@ article {
 }
 
 .subtitle {
+  line-height: 1.45;
   margin: 0;
-  font-size: x-large;
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
   font-weight: 600;
 
   a {
@@ -43,8 +51,10 @@ article {
 }
 
 .article-title {
-  font-size: x-large;
-  margin-top: 2rem;
+  font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.125rem);
+  margin: 2.5rem 0 1rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
   color: var(--color-heading);
   font-weight: 600;
 }
@@ -54,6 +64,7 @@ article {
   margin-bottom: 2.5rem;
   display: flex;
   align-items: stretch;
+  gap: 1.5rem;
 }
 
 .article-details {
@@ -62,15 +73,16 @@ article {
   justify-content: space-between;
   overflow: hidden;
   flex-grow: 1;
-  margin-right: 1rem;
+  min-width: 0;
 }
 
 .article-description {
+  font-size: 0.9375rem;
   color: var(--color-muted);
   margin-top: 0;
   margin-bottom: 0;
   padding-top: 0.5rem;
-  padding-bottom: 1rem;
+  padding-bottom: 0.75rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -79,7 +91,7 @@ article {
 .article-image {
   width: 33.33%;
   flex-shrink: 0;
-  height: 100px;
+  height: 112px;
 }
 
 .article-image img {
@@ -93,6 +105,8 @@ article {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
 }
 
 .flex-items {
@@ -113,6 +127,44 @@ article {
   }
 }
 
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.menu-toggle:hover {
+  background-color: var(--color-code-background);
+}
+
+.menu-toggle:focus-visible,
+.site-menu a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.menu-icon-close,
+.menu-toggle[aria-expanded="true"] .menu-icon-open {
+  display: none;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-icon-close {
+  display: block;
+}
+
+header > .header-container {
+  padding-block: 0.25rem 1.5rem;
+}
+
 .header-line {
   width: 100%;
   border-width: 2px;
@@ -124,22 +176,23 @@ footer {
   display: flex;
   justify-content: center;
   border-top: 1px solid var(--color-text); /* material gray 900 */
-  margin-top: 1rem;
+  margin-top: 3rem;
+  padding-top: 1rem;
 
   p {
-    font-size: 0.8rem;
+    font-size: 0.8125rem;
   }
 }
 
 .page-toc {
-  margin: 1rem 0 1rem 0;
+  margin: 1.75rem 0 0;
   padding: 1rem 1.5rem;
   width: auto;
   border: 1px solid #CFD8DC; /* material blueglay 100 */
 
   summary {
     color: var(--color-primary); /* material blue 500 */
-    font-size: 1.1em;
+    font-size: 1rem;
     letter-spacing: 0.02em;
     user-select: none;
     outline: none;
@@ -171,7 +224,7 @@ code {
   font-weight: 400;
   font-style: normal;
   font-size: 0.9rem;
-  line-height: 1.3;
+  line-height: 1.65;
   font-variant-ligatures: none;
 }
 
@@ -179,8 +232,8 @@ code {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   background-color: var(--color-code-background);
-  padding: 1em;
-  margin: 1rem 0;
+  padding: 1.25rem;
+  margin: 1.75rem 0;
 }
 
 .highlight pre {
@@ -198,10 +251,10 @@ code {
 
 table {
   width: 100%;
-  margin: 0 auto;
+  margin: 1.75rem auto;
   padding: 0;
   border-collapse: collapse;
-  font-size: small;
+  font-size: 0.875rem;
   box-shadow: 0 1px 3px #00000030;
   border-radius: 4px;
 
@@ -257,8 +310,8 @@ figure {
 blockquote {
   color: var(--color-muted); /* material gray 700 */
   border-left: .25em solid;
-  margin: 1em;
-  padding: 0 1em;
+  margin: 1.75rem 0;
+  padding: 0.25rem 1.25rem;
   font-style: italic;
 }
 
@@ -276,7 +329,7 @@ blockquote {
 }
 
 .font-large {
-  font-size: large;
+  font-size: 1.125rem;
   color: var(--color-heading);
 }
 
@@ -302,7 +355,7 @@ blockquote {
   border: none;
   margin-top: 1.5rem;
   padding: 10px;
-  font-size: medium;
+  font-size: 1rem;
   color: var(--color-text); /* material gray 900 */
   border-radius: 4px;
   width: 100%;
@@ -332,14 +385,16 @@ blockquote {
   display: flex;
   border: 1px solid var(--color-border);
   border-radius: 4px;
-  margin-bottom: 16px;
+  margin-block: 1.75rem;
   position: relative;
 }
 
 .website-logo {
   margin-right: 16px;
   width: 130px;
-  height: 130px;
+  min-height: 130px;
+  position: relative;
+  align-self: stretch;
   flex-shrink: 0;
   display: flex;
   justify-content: center;
@@ -347,6 +402,8 @@ blockquote {
 }
 
 .website-logo img {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
@@ -354,22 +411,22 @@ blockquote {
   object-fit: cover;
 }
 
-.logo-placeholder {
-  width: 100%;
-  height: 100%;
-  background-color: var(--color-border);
-  border-radius: 4px;
-}
-
 .website-details {
+  min-width: 0;
+  padding: 0.75rem 1rem 0.75rem 0;
   display: flex;
   flex-direction: column;
+}
+
+.website-details:only-child {
+  padding-left: 1rem;
 }
 
 .website-title {
   font-size: 1.2em;
   font-weight: 600;
-  margin-bottom: 4px;
+  margin: 0 0 0.25rem;
+  line-height: 1.5;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -404,10 +461,176 @@ blockquote {
   text-decoration: none;
 }
 
+header nav,
+.article-tag,
+time {
+  font-size: 0.875rem;
+}
+
+.article-tag p {
+  margin-block: 0;
+}
+
+.post-content {
+  font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem);
+  margin-top: 2.5rem;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+
+.post-content > :first-child {
+  margin-top: 0;
+}
+
+.post-content > p,
+.post-content > ul,
+.post-content > ol,
+.post-content > details,
+.post-content > figure {
+  margin-block: 1.5rem;
+}
+
+.post-content :is(h2, h3, h4, h5, h6) {
+  margin-block: 2.5rem 1rem;
+  line-height: 1.5;
+}
+
+.post-content h2 {
+  font-size: clamp(1.5rem, 1.25rem + 0.8vw, 1.75rem);
+}
+
+.post-content h3 {
+  font-size: clamp(1.3125rem, 1.2rem + 0.4vw, 1.4375rem);
+}
+
+.post-content h4 {
+  font-size: 1.1875rem;
+}
+
+.post-content h5 {
+  font-size: 1.0625rem;
+}
+
+.post-content h6 {
+  font-size: 1rem;
+}
+
+.post-content :is(ul, ol) {
+  padding-left: 1.5rem;
+}
+
+.post-content li + li {
+  margin-top: 0.4rem;
+}
+
+.post-content li > :is(ul, ol) {
+  margin-block: 0.5rem;
+}
+
+.post-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+.post-content .website-logo img {
+  height: 100%;
+}
+
+.post-content hr {
+  margin-block: 2.5rem;
+}
+
+#search-results > div + div {
+  margin-top: 1.5rem;
+}
+
 @media screen and (max-width: 768px) {
   article {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    box-sizing: border-box;
+    width: calc(100% - 2rem);
+    padding-block: 1.25rem 1.5rem;
+  }
+
+  .article-item {
+    gap: 1rem;
+  }
+
+  .article-title {
+    margin-top: 2rem;
+  }
+
+  .post-content {
+    margin-top: 2rem;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  header > .header-container {
+    gap: 0.5rem 1rem;
+    padding-block: 0 0.75rem;
+  }
+
+  .site-header > .flex-none {
+    flex: 1;
+    min-width: 0;
+  }
+
+  header .title {
+    font-size: clamp(1.25rem, 6vw, 1.5rem);
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .menu-toggle:not([hidden]) {
+    display: inline-flex;
+  }
+
+  .site-menu {
+    flex-basis: 100%;
+    font-size: 1rem;
+  }
+
+  .site-header.has-menu-toggle .site-menu {
+    display: none;
+  }
+
+  .site-header.has-menu-toggle .menu-toggle[aria-expanded="true"] + .site-menu {
+    display: block;
+  }
+
+  .site-menu .flex-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    max-width: none;
+    padding-top: 0.5rem;
+  }
+
+  .site-menu a {
+    display: flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding-inline: 0.75rem;
+    border-radius: 4px;
+  }
+
+  .site-menu a:hover {
+    background-color: var(--color-code-background);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .article-image {
+    width: 28%;
+    height: 96px;
+  }
+
+  .website-logo {
+    width: 88px;
+    min-height: 112px;
+    margin-right: 0.75rem;
+  }
+
+  .website-title {
+    font-size: 1rem;
   }
 }

@@ -1,5 +1,9 @@
+{{- $scripts := slice "js/menu.js" }}
 {{- if eq .Layout "archives" }}
-  {{- with resources.Get "js/search.js" }}
+  {{- $scripts = $scripts | append "js/search.js" }}
+{{- end }}
+{{- range $scripts }}
+  {{- with resources.Get . }}
     {{- $opts := dict "minify" (ne hugo.Environment "development") }}
     {{- $script := . | js.Build $opts }}
     {{- if ne hugo.Environment "development" }}
