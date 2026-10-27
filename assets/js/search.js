@@ -1,8 +1,11 @@
 function searchItems(items, query) {
-  const normalizedQuery = query.replace(/^[▽▼]/, '').toLowerCase();
+  const normalizedQuery = query.trim().replace(/^[▽▼]/, '').toLowerCase();
   return items.flatMap(item => {
     const position = item.body.toLowerCase().indexOf(normalizedQuery);
-    return position < 0 ? [] : [{ item, position }];
+    const titleMatches = item.title.toLowerCase().includes(normalizedQuery);
+    const tagMatches = (item.tags || []).some(tag => String(tag).toLowerCase().includes(normalizedQuery));
+    if (position < 0 && !titleMatches && !tagMatches) return [];
+    return [{ item, position: Math.max(position, 0) }];
   });
 }
 

@@ -1,5 +1,28 @@
 # hugo-yuzumone-theme
 
+## Content language and date formatting
+
+The HTML `lang` attribute uses the site's language code. Dates use `locale`.
+For Japanese content with dates formatted in US English:
+
+```toml
+defaultContentLanguage = 'ja'
+locale = 'en-US'
+```
+
+For multilingual sites, each language's language code and locale apply to its
+pages independently.
+
+## Search
+
+Archives searches article titles, body text, and tags using case-insensitive
+substring matching. Body matches show an excerpt starting at the match; title
+and tag matches use the beginning of the body. An empty query shows all entries.
+HTML entities are decoded in the generated search index and results are rendered
+as plain text.
+
+Run the search regression tests with `node --test tests/search.test.cjs`.
+
 ## Home page
 
 Limit the home page to selected top-level content sections in `hugo.toml`:
