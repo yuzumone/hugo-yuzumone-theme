@@ -1,13 +1,11 @@
 {{- $host := .host -}}
 <a href="{{ .url }}" class="website-card-link">
   <div class="website-card">
+    {{ with .metadata.image }}
     <div class="website-logo">
-      {{ with .metadata.image }}
       <img src="{{ . }}" alt="{{ $.metadata.description }}">
-      {{ else }}
-      <div class="logo-placeholder"></div>
-      {{ end }}
     </div>
+    {{ end }}
     <div class="website-details">
       {{ with .metadata.title }}
       <p class="website-title">{{ . }}</p>

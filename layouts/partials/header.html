@@ -1,7 +1,17 @@
-<div class="header-container">
+<div class="header-container site-header">
   <div class="flex-none">
     <h1 class="title"><a href="{{ .Site.BaseURL }}">{{ .Site.Title}}</a></h1>
   </div>
+  {{ if .Site.Menus.main }}
+  <button class="menu-toggle" type="button" aria-controls="site-menu" aria-expanded="false" aria-label="メニューを開く" hidden>
+    <svg class="menu-icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
+      <path d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+    <svg class="menu-icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
+      <path d="m6 6 12 12M6 18 18 6" />
+    </svg>
+  </button>
   {{ partial "menu.html" . }}
+  {{ end }}
 </div>
 <div class="header-line"></div>

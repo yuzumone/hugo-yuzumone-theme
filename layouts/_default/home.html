@@ -3,5 +3,7 @@
 {{ range first 10  $filtered }}
 {{ partial "article-card.html" . }}
 {{ end }}
-<p><a href="{{ .Site.BaseURL }}/posts/">See more posts</a></p>
+{{ with .Site.GetPage "/archives" }}
+<p><a href="{{ .RelPermalink }}">See more posts</a></p>
+{{ end }}
 {{ end }}
