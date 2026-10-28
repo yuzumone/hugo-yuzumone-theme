@@ -1,9 +1,20 @@
 {{ define "main" }}
 {{ $filtered := where .Site.RegularPages "Params.hidden" "!=" true }}
-{{ range first 10  $filtered }}
-{{ partial "article-card.html" . }}
+{{/* Read the explicit parameter without Hugo's automatic mainSections fallback. */}}
+{{ $mainSections := index .Site.Params "mainsections" | default slice }}
+{{ $morePage := .Site.GetPage "/archives" }}
+{{ with $mainSections }}
+  {{ $filtered = where $filtered "Section" "in" . }}
+  {{ if eq (len .) 1 }}
+    {{ with $.Site.GetPage (printf "/%s" (index . 0)) }}
+      {{ $morePage = . }}
+    {{ end }}
+  {{ end }}
 {{ end }}
-{{ with .Site.GetPage "/archives" }}
-<p><a href="{{ .RelPermalink }}">See more posts</a></p>
+{{ range first 10 $filtered }}
+  {{ partial "article-card.html" . }}
+{{ end }}
+{{ with $morePage }}
+<p><a href="{{ .RelPermalink }}">See all posts</a></p>
 {{ end }}
 {{ end }}

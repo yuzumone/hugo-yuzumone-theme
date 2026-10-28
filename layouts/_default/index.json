@@ -5,6 +5,6 @@
   {{ if eq $tags nil }}
     {{ $tags = slice }}
   {{ end }}
-  {{ $items = $items | append (dict "title" .Title "body" .Plain "url" .Permalink "tags" $tags) }}
+  {{ $items = $items | append (dict "title" .Title "body" (.Plain | htmlUnescape) "url" .Permalink "tags" $tags) }}
 {{ end }}
 {{ $items | jsonify }}

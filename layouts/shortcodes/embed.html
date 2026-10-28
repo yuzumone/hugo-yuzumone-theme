@@ -1,13 +1,21 @@
 {{- $url := .Get "url" -}}
 {{- $fallbackTitle := .Get "title" | default $url -}}
 {{- $parsedURL := urls.Parse $url -}}
-{{- $result := try (resources.GetRemote $url) -}}
+{{- $result := try (resources.GetRemote $url (dict "timeout" "3s")) -}}
 {{- if $result.Err -}}
   <a href="{{ $url }}">{{ $fallbackTitle }}</a>
 {{- else -}}
   {{- with $result.Value -}}
-    {{- $metadata := partial "embed/metadata.html" .Content -}}
-    {{- partial "embed/card.html" (dict "url" $url "host" $parsedURL.Host "scheme" $parsedURL.Scheme "metadata" $metadata) -}}
+    {{- /* Go regular expressions match invalid UTF-8 bytes as U+FFFD. */ -}}
+    {{- if findRE `\x{FFFD}` .Content -}}
+      <a href="{{ $url }}">{{ $fallbackTitle }}</a>
+    {{- else -}}
+      {{- $metadata := partial "embed/metadata.html" .Content -}}
+      {{- if not $metadata.title -}}
+        {{- $metadata = merge $metadata (dict "title" $fallbackTitle) -}}
+      {{- end -}}
+      {{- partial "embed/card.html" (dict "url" $url "host" $parsedURL.Host "scheme" $parsedURL.Scheme "metadata" $metadata) -}}
+    {{- end -}}
   {{- else -}}
     <a href="{{ $url }}">{{ $fallbackTitle }}</a>
   {{- end -}}
