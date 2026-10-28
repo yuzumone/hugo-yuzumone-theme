@@ -1,0 +1,20 @@
+{{- $font := false -}}
+{{- $url := urls.Parse . -}}
+{{- if in (slice "https" "http") $url.Scheme -}}
+  {{- $result := try (resources.GetRemote . (dict "timeout" "15s")) -}}
+  {{- if $result.Err -}}
+    {{- errorf "Unable to download OG image font %q: %s" . $result.Err -}}
+  {{- else if $result.Value -}}
+    {{- $font = $result.Value -}}
+  {{- else -}}
+    {{- errorf "OG image font URL returned no resource: %s" . -}}
+  {{- end -}}
+{{- else if $url.Scheme -}}
+  {{- errorf "OG image font must be an HTTP(S) URL or a path under assets/: %s" . -}}
+{{- else -}}
+  {{- $font = resources.Get . -}}
+  {{- if not $font -}}
+    {{- errorf "OG image font not found in assets/: %s" . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $font -}}

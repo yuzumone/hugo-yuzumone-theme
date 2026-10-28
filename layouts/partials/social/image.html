@@ -1,0 +1,36 @@
+{{- $image := false -}}
+{{- $config := .Site.Params.ogImage | default dict -}}
+{{- $enabled := $config.enabled | default false -}}
+{{- if isset .Params "generateogimage" -}}
+  {{- $enabled = .Params.generateOGImage -}}
+{{- end -}}
+{{- if and $enabled (ne .Kind "404") -}}
+  {{- $backgroundPath := $config.background | default "images/og-background.png" -}}
+  {{- $fontPath := $config.font | default "https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexsansjp/IBMPlexSansJP-SemiBold.ttf" -}}
+  {{- $background := resources.Get $backgroundPath -}}
+  {{- $font := partialCached "social/font.html" $fontPath $fontPath -}}
+  {{- if not $background -}}{{- errorf "OG image background not found in assets/: %s" $backgroundPath -}}{{- end -}}
+  {{- if and $background $font -}}
+    {{- $image = $background.Fill "1200x630 Center png" -}}
+    {{- with $config.logo | default "images/og-logo.webp" -}}
+      {{- with resources.Get . -}}
+        {{- $image = $image.Filter (images.Overlay (.Fit "80x80") 100 65) -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $title := or .Title .Site.Title | plainify | htmlUnescape | strings.TrimSpace -}}
+    {{/* The default Japanese font has no emoji glyphs; omit emoji on title cards only. */}}
+    {{- $title = replaceRE `[\x{1F000}-\x{1FAFF}\x{2600}-\x{27BF}\x{FE0F}\x{200D}]` "" $title | strings.TrimSpace -}}
+    {{- $title = partial "social/wrap-title.html" $title -}}
+    {{- $color := $config.color | default "#fafafa" -}}
+    {{- $image = $image.Filter (images.Text $title (dict "font" $font "color" $color "size" 56 "linespacing" 14 "x" 100 "y" 180)) -}}
+    {{- $siteTitle := .Site.Title | plainify | htmlUnescape | strings.Truncate 36 | htmlUnescape -}}
+    {{- $image = $image.Filter (images.Text $siteTitle (dict "font" $font "color" $color "size" 26 "x" 100 "y" 545)) -}}
+    {{- $slug := strings.Trim .Path "/" -}}
+    {{- if .IsHome -}}{{- $slug = "index" -}}{{- end -}}
+    {{- $target := printf "og/%s.png" (path.Join (strings.Trim .Site.LanguagePrefix "/") $slug) -}}
+    {{- $image = resources.Copy $target $image | fingerprint -}}
+    {{/* Resolve the permalink to publish the copied image even when cached. */}}
+    {{- $published := $image.RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+{{- return $image -}}

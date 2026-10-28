@@ -28,6 +28,11 @@ home = ["html", "json"]
 # Optional: limit the home page to selected content sections.
 [params]
 # mainSections = ['post']
+# description = 'A short description of your site.'
+
+# Optional: X/Twitter account used in Twitter Card metadata.
+# [params.social]
+# twitter = 'your_account'
 
 # Optional: set your IDs to enable these services in production builds.
 [services.googleAnalytics]
@@ -35,3 +40,12 @@ id = ''
 
 [params.googleAdSense]
 client = ''
+
+# Generate 1200x630 title cards locally during the Hugo build.
+[params.ogImage]
+enabled = true
+background = 'images/og-background.png'
+logo = 'images/og-logo.png'
+# Optional: direct TTF/OTF URL, or a path relative to assets/.
+# font = 'https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexsansjp/IBMPlexSansJP-SemiBold.ttf'
+# font = 'fonts/my-font.ttf'

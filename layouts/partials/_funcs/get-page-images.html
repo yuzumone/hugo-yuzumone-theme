@@ -1,0 +1,6 @@
+{{/* Supply only generated title cards to Hugo's Open Graph and Twitter templates. */}}
+{{- $selected := slice -}}
+{{- with partialCached "social/image.html" . .Permalink -}}
+  {{- $selected = slice (dict "Image" . "RelPermalink" .RelPermalink "Permalink" .Permalink) -}}
+{{- end -}}
+{{- return $selected -}}

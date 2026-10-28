@@ -1,0 +1,33 @@
+{{/* Wrap Japanese characters and Latin words within the title region. */}}
+{{- $lines := slice -}}
+{{- $line := "" -}}
+{{- $width := 0.0 -}}
+{{- range findRE `[A-Za-z0-9]+|\s+|.` . -}}
+  {{- $token := . -}}
+  {{- $tokenWidth := 0.0 -}}
+  {{- range findRE `.` $token -}}
+    {{- $tokenWidth = add $tokenWidth (cond (gt (len (findRE `[ -~]` .)) 0) 0.6 1.0) -}}
+  {{- end -}}
+  {{- if and $line (gt (add $width $tokenWidth) 17.5) -}}
+    {{- $lines = $lines | append (strings.TrimSpace $line) -}}
+    {{- $line = "" -}}
+    {{- $width = 0.0 -}}
+  {{- end -}}
+  {{- range findRE `.` $token -}}
+    {{- $charWidth := cond (gt (len (findRE `[ -~]` .)) 0) 0.6 1.0 -}}
+    {{- if and $line (gt (add $width $charWidth) 17.5) -}}
+      {{- $lines = $lines | append (strings.TrimSpace $line) -}}
+      {{- $line = "" -}}
+      {{- $width = 0.0 -}}
+    {{- end -}}
+    {{- if or $line (ne (strings.TrimSpace .) "") -}}
+      {{- $line = printf "%s%s" $line . -}}
+      {{- $width = add $width $charWidth -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- with strings.TrimSpace $line -}}{{- $lines = $lines | append . -}}{{- end -}}
+{{- if gt (len $lines) 4 -}}
+  {{- $lines = (first 3 $lines) | append (printf "%s…" (index $lines 3 | strings.Truncate 16 "" | htmlUnescape)) -}}
+{{- end -}}
+{{- return (delimit $lines "\n") -}}
