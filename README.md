@@ -41,6 +41,21 @@ as plain text.
 
 Run the search regression tests with `node --test tests/search.test.cjs`.
 
+## Custom head elements
+
+Create `layouts/partials/head/custom.html` in your site to append meta tags,
+scripts, or other elements to every page's `<head>`. The theme includes an empty
+default partial, so no site override is required. The current page is available
+as `.` inside the partial.
+
+For example, to add a site verification tag:
+
+```html
+<meta name="google-site-verification" content="your-verification-token">
+```
+
+This lets you extend the head without copying the theme's `head.html`.
+
 ## Canonical URLs and social sharing
 
 Each page emits a canonical link using its permalink. Set `baseURL` to the public
