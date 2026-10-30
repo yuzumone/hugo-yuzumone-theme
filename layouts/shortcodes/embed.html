@@ -1,4 +1,7 @@
 {{- $url := .Get "url" -}}
+{{- with .Get "ref" -}}
+  {{- $url = ref $.Page . -}}
+{{- end -}}
 {{- $fallbackTitle := .Get "title" | default $url -}}
 {{- $parsedURL := urls.Parse $url -}}
 {{- $result := try (resources.GetRemote $url (dict "timeout" "3s")) -}}

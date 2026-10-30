@@ -41,6 +41,22 @@ as plain text.
 
 Run the search regression tests with `node --test tests/search.test.cjs`.
 
+## Link cards
+
+Use `url` for external links, or `ref` to resolve an internal content path with
+Hugo's built-in `ref` function:
+
+```text
+{{< embed url="https://example.com/" title="Fallback title" >}}
+{{< embed ref="/articles/my-article/" >}}
+```
+
+Both forms fetch the destination's published HTML to build the card. If fetching
+fails, a plain link is shown; the optional `title` supplies its fallback text.
+Internal articles must be published for their metadata to be available.
+An unresolved `ref` follows Hugo's reference-error settings. Use either `url` or
+`ref`; `ref` takes precedence when both are supplied.
+
 ## Custom head elements
 
 Create `layouts/partials/head/custom.html` in your site to append meta tags,
