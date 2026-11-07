@@ -1,3 +1,5 @@
+{{- if not .page.Date.IsZero -}}
 {{- $dateMachine := .page.Date | time.Format "2006-01-02T15:04:05-07:00" -}}
 {{- $dateHuman := .page.Date | time.Format ":date_long" -}}
 <time datetime="{{ $dateMachine }}">{{ with .prefix }}{{ . }} {{ end }}{{ $dateHuman }}</time>
+{{- end -}}
